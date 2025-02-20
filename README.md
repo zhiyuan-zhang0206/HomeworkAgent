@@ -103,7 +103,7 @@ You will need to supply API credentials for some functionalities used by this pr
 - **Gemini**: **FREE** API key for LLM calling
 - **Anthropic**: For LLM calling (supervisor agent and member agent default model)
 - **DeepSeek**: For LLM calling (math agent)
-- **OpenAI**: For LLM calling, converting pdf to markdown (`pdf2md.py`)
+- **OpenAI**: For LLM calling, JSON mode assurance, and converting pdf to markdown (`pdf2md.py`)
 - **Azure**: For OCR (browser agent)
 - [Optional] **LangSmith**: For better tracing and monitoring. Check this [link](https://docs.smith.langchain.com/old/tracing/quick_start) for more details.
 
@@ -142,7 +142,7 @@ This invokes the Coder Agent to solve a simple coding question, serving as a min
 ```bash
 python main.py
 ```
-> Try the task "finish the homework TheoreticalStatistics\homework3_q2.pdf" to test it.
+> Try the task "finish the homework TheoreticalStatistics\homework3_q2.pdf" to test it. More simple examples are also provided in the `main.py` file.
 
 ## 📄 License
 
