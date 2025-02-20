@@ -70,6 +70,10 @@ with warnings.catch_warnings():
             model="gemini-2.0-flash-thinking-exp-01-21",
             api_key=os.getenv("GEMINI_API_KEY"),
         ),
+        "gemini-2.0-flash": ChatGoogleGenerativeAI(
+            model="gemini-2.0-flash",
+            api_key=os.getenv("GEMINI_API_KEY"),
+        ),
     }
 
 try:

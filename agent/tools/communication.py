@@ -11,7 +11,7 @@ from ..config import USER_EMAIL, EMAIL_DRAFT_MODE
 @tool
 def send_email_to_user(message: str, wait_response: bool = False, timeout_minutes: int = 10)->str:
     '''
-    Send an email message to the only user. A convenient function.
+    Send an email message to the user. A convenient tool for `send_email` with the user's email hardcoded in the config.
     
     Args:
         - message: str
