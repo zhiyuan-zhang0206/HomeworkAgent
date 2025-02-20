@@ -1,0 +1,17 @@
+__pycache__
+.key
+.env
+logs/
+histories/
+_temp_code.py
+data/
+tests/*.png
+temp/
+.langgraph_api/
+.cursorignore
+.vscode/
+_notes.md
+_tasks.txt
+*egg-info/
+config.yaml
+wechat_bot.py

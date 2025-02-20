@@ -1,0 +1,16 @@
+# All LLM configurations default to "gemini-2.0-flash-thinking-exp" if not specified (free to use)
+memory_relevance_model: "gemini-2.0-flash-thinking-exp"
+supervisor_model: "gemini-2.0-flash-thinking-exp"
+member_default_model: "gemini-2.0-flash-thinking-exp"
+memory_processor_model: "gemini-2.0-flash-thinking-exp"
+math_agent_model: "gemini-2.0-flash-thinking-exp"
+image_description_model: "gemini-2.0-flash-thinking-exp"
+json_ensure_model: "gemini-2.0-flash-thinking-exp"
+features:
+  memory:
+    enable_retrieval: true
+    enable_updater: true
+    enable_pinecone_update: true
+  email:
+    draft_mode: false
+    user_email: "example@domain.com" 
