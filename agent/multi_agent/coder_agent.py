@@ -1,4 +1,4 @@
-from ..tools.files import read_file, write_file
+from ..tools.files import read_file, write_file, get_file_tree
 from ..tools.terminals import open_terminal, command_terminal, get_terminal_output, close_terminal
 from .member_agent import make_member_node
 
@@ -17,6 +17,7 @@ coder_node = make_member_node(CODER_AGENT_NAME,
                               CODER_ROLE_PROMPT, 
                               [read_file, 
                                write_file, 
+                               get_file_tree,
                                open_terminal, 
                                command_terminal, 
                                get_terminal_output, 

@@ -58,7 +58,7 @@ def get_and_parse_json_response(llm, messages) -> tuple[str, dict]:
     response = llm.invoke(messages)
     logger.info(f"LLM response: \n{response.content}")
     response, parsed = parse_json_response(response.content)
-    logger.info(f"Parsed response: {parsed}")
+    logger.info(f"Parsed response: \n{json.dumps(parsed, indent=4)}")
     return response, parsed
 
 
@@ -91,7 +91,7 @@ async def aget_and_parse_json_response(llm, messages):
     response = await llm.ainvoke(messages, timeout=30)
     logger.info(f"LLM response: \n{response.content}")
     response, parsed = parse_json_response(response.content)
-    logger.info(f"Parsed response: {parsed}")
+    logger.info(f"Parsed response: \n{json.dumps(parsed, indent=4)}")
     return response, parsed
 
 

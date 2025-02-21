@@ -28,7 +28,7 @@ async def pdf_to_markdown(file_path: str, select_pages: int | list[int] | None =
         warnings.filterwarnings(
             "ignore",
             category=UserWarning,
-            message=r"Custom system prompt was provided which overrides the default system prompt.*"
+            message=r".*Default prompt for zerox is:.*"
         )
         result = await zerox(
             file_path=file_path,

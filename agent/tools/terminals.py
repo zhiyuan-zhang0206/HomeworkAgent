@@ -99,7 +99,7 @@ class TerminalManager:
             logger.error(message)
             return message
 
-    def send(self, id: Optional[int] = None, name: Optional[str] = None, command: str = "") -> str:
+    def send(self, id: Optional[int] = None, name: Optional[str] = None, command: str = "", wait_for_output_seconds: float = 0) -> str:
         logger.info(f"Trying to send command '{command}' to terminal with {id=} and {name=}.")
         terminal_name = self._get_terminal_name(id, name)
 
@@ -116,17 +116,26 @@ class TerminalManager:
         
         proc = terminal['process']
         try:
+            initial_output = self.get_output(name=terminal_name) if wait_for_output_seconds > 0 else ""
+            
             if command == "SIGINT":
                 proc.send_signal(signal.CTRL_BREAK_EVENT)
                 msg = f"Sent SIGINT to terminal '{terminal_name}'"
                 logger.info(msg)
-                return msg
             else:
                 proc.stdin.write(command + '\n')
                 proc.stdin.flush()
                 msg = f"Command '{command}' sent to terminal '{terminal_name}'"
                 logger.info(msg)
-                return msg
+
+            if wait_for_output_seconds > 0:
+                logger.info(f"Waiting {wait_for_output_seconds} seconds for output")
+                time.sleep(wait_for_output_seconds)
+                final_output = self.get_output(name=terminal_name)
+                new_output = final_output[len(initial_output):]
+                return new_output if new_output else "No new output received during wait period"
+
+            return msg
         except Exception as e:
             msg = f"Failed sending to terminal '{terminal_name}': {str(e)}"
             logger.error(msg)
@@ -204,10 +213,10 @@ def open_terminal(name: str = None) -> str:
     return terminal_manager.open(name)
 
 @tool
-def command_terminal(command: str, id: int = None, name: str = None) -> str:
+def command_terminal(command: str, id: int = None, name: str = None, wait_for_output_seconds: float = 0) -> str:
     '''
     Send a command to a terminal.
-    Returns a message indicating the success or failure of the operation.
+    Returns a message indicating the success or failure of the operation, or the command output if waiting for output.
     Must provide either id or name.
     To use Ctrl+C, use command="SIGINT".
 
@@ -215,9 +224,12 @@ def command_terminal(command: str, id: int = None, name: str = None) -> str:
         command: The command to send to the terminal.
         id: The id of the terminal.
         name: The name of the terminal.
+        wait_for_output_seconds: Number of seconds to wait before returning output (0 means don't wait).
+            If > 0, waits for the specified duration and returns all new output that appeared during that time.
+            If no new output appears during the wait period, returns a message indicating no new output.
     '''
     terminal_manager = TerminalManager()
-    return terminal_manager.send(id=id, name=name, command=command)
+    return terminal_manager.send(id=id, name=name, command=command, wait_for_output_seconds=wait_for_output_seconds)
 
 @tool
 def get_terminal_output(id: int = None, name: str = None, lines: int = None) -> str:
