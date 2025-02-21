@@ -62,6 +62,11 @@ with warnings.catch_warnings():
             base_url="https://api.siliconflow.cn/v1",
             max_tokens=8192
         ),
+        "deepseek-reasoner-bce": ChatOpenAI(
+            api_key=os.getenv("BCE_API_KEY"),
+            model="deepseek-r1",
+            base_url="https://qianfan.baidubce.com/v2"
+        ),
         "grok-2": ChatXAI(
             model="grok-2-latest",
             api_key=os.getenv("XAI_API_KEY"),
@@ -73,6 +78,11 @@ with warnings.catch_warnings():
         "gemini-2.0-flash": ChatGoogleGenerativeAI(
             model="gemini-2.0-flash",
             api_key=os.getenv("GEMINI_API_KEY"),
+        ),
+        "deepseek-reasoner-openrouter": ChatOpenAI(
+            model="deepseek/deepseek-r1:free",
+            api_key=os.getenv("OPENROUTER_API_KEY"),
+            base_url="https://openrouter.ai/api/v1"
         ),
     }
 

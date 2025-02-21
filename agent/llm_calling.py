@@ -23,7 +23,7 @@ def retry_handler(exception: Exception) -> bool:
     if isinstance(exception, HTTPError):
         status_code = exception.response.status_code
         return status_code in [500]
-    return isinstance(exception, (json.JSONDecodeError, 
+    return isinstance(exception, (json.JSONDecodeError, # this is for busy deepseek official api
                                   RateLimitError, 
                                   InvalidResponseFormatError, 
                                   InternalServerError, 
@@ -57,6 +57,8 @@ def get_and_parse_json_response(llm, messages) -> tuple[str, dict]:
     logger.info(f"Invoking LLM with last message: \n{messages[-1].content}")
     response = llm.invoke(messages)
     logger.info(f"LLM response: \n{response.content}")
+    if response.additional_kwargs.get("reasoning_content"):
+        logger.info(f"Reasoning content: {response.additional_kwargs['reasoning_content']}")
     response, parsed = parse_json_response(response.content)
     logger.info(f"Parsed response: \n{json.dumps(parsed, indent=4)}")
     return response, parsed

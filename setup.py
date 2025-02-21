@@ -30,6 +30,6 @@ setup(
     author="Zhiyuan Zhang (John Zhang)",
     author_email="zhiyuan.zhang0206@gmail.com",
     description="An multi-agent system for homework completion.",
-    long_description=open("readme.md").read() if os.path.exists("readme.md") else "",
+    long_description=open("readme.md", encoding="utf-8").read() if os.path.exists("readme.md") else "",
     long_description_content_type="text/markdown",
 )
