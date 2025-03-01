@@ -93,7 +93,7 @@ def make_member_llm_node(agent_name: str, role_prompt: str, llm = MEMBER_DEFAULT
         if state["next_agent_prompt"]:
             prompt = state["next_agent_prompt"]
             logger.info(f"{agent_name} llm_node processing prompt from supervisor: {prompt}")
-            state["member_messages"][agent_name].append(HumanMessage(content=f"Supervisor message: {prompt}"))
+            state["member_messages"][agent_name].append(HumanMessage(content=f"Supervisor message: {prompt}")) # TODO: use add_message reducer
             state["member_tool_calls"][agent_name] = []
             state["member_trigger_long_term_memory"][agent_name] = True
             state["member_retrieved_memory_ids"][agent_name] = []
@@ -149,7 +149,7 @@ def make_member_human_node(agent_name: str):
         value = input("Input your instruction here. Leave blank if you don't have any:\nInstruction: ").strip()
         if value:
             logger.info(f"Human instruction: {value}")
-            messages = state["member_messages"][agent_name]
+            messages = state["member_messages"][agent_name] # TODO: use langchain breakpoint
             messages.append(HumanMessage(content=f'System: None of the tool calls are executed because human interrupted with instruction message: {value}'))
             return Command(goto=agent_name, update=state)
         else:

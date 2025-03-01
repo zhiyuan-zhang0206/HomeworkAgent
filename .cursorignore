@@ -1,0 +1,13 @@
+examples/
+.gitignore
+.cursorignore
+.vscode/
+.langgraph_api/
+__pycache__/
+.env
+.key
+_notes.md
+_tasks.txt
+requirements.txt
+*.egg-info/
+data/

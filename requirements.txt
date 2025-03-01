@@ -18,3 +18,5 @@ langchain_deepseek
 pinecone
 pinecone-client
 py-zerox
+urllib3
+certifi

@@ -19,9 +19,9 @@ MEMBER_NODES = {
 }
 
 def get_graph():
-    builder = StateGraph(State)
+    builder = StateGraph(State) # TODO: input=InputState, output=OutputState
     builder.add_node(SUPERVISOR_AGENT_NAME, supervisor_node)
-    builder.add_node(SUPERVISOR_HUMAN_NODE_NAME, supervisor_human_node)
+    builder.add_node(SUPERVISOR_HUMAN_NODE_NAME, supervisor_human_node) # TODO: wrap this node in supervisor_agent, or human_node?
     for name, node in MEMBER_NODES.items():
         builder.add_node(name, node)
     builder.set_entry_point(SUPERVISOR_AGENT_NAME)

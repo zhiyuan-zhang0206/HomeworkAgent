@@ -8,7 +8,6 @@ data/
 tests/*.png
 temp/
 .langgraph_api/
-.cursorignore
 .vscode/
 _notes.md
 _tasks.txt
